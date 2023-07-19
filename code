@@ -1,0 +1,207 @@
+安装 openCV
+  pip install opencv-python
+  pip install requests
+控制前进代码
+  import RPi.GPIO as GPIO
+  import time
+  # 定义每个电磁阀的 GPIO 引脚编号
+  dcf_1 = 11
+  dcf_2 = 12
+  dcf_3 = 13
+  dcf_4 = 15
+  dcf_5 = 16
+  dcf_6 = 18
+  dcf_7 = 19
+  dcf_8 = 21
+  dcf_9 = 22
+  dcf_10 = 23
+  dcf_11 = 24
+  dcf_12 = 26
+  # 初始化 GPIO 引脚
+  GPIO.setmode(GPIO.BOARD)
+  GPIO.setup(dcf_1, GPIO.OUT)
+  GPIO.setup(dcf_2, GPIO.OUT)
+  GPIO.setup(dcf_3, GPIO.OUT)
+  GPIO.setup(dcf_4, GPIO.OUT)
+  GPIO.setup(dcf_5, GPIO.OUT)
+  GPIO.setup(dcf_6, GPIO.OUT)
+  GPIO.setup(dcf_7, GPIO.OUT)
+  GPIO.setup(dcf_8, GPIO.OUT)
+  GPIO.setup(dcf_9, GPIO.OUT)
+  GPIO.setup(dcf_10, GPIO.OUT)
+  GPIO.setup(dcf_11, GPIO.OUT)
+  GPIO.setup(dcf_12, GPIO.OUT)
+  # 控制电磁阀的开断
+  GPIO.output(dcf_1, GPIO.HIGH)
+  GPIO.output(dcf_3, GPIO.HIGH)
+  time.sleep(0.5)
+  GPIO.output(dcf_8, GPIO.HIGH)
+  GPIO.output(dcf_3, GPIO.LOW)
+  GPIO.output(dcf_4, GPIO.HIGH)
+  GPIO.output(dcf_5, GPIO.HIGH)
+  GPIO.output(dcf_6, GPIO.HIGH)
+  time.sleep(2)
+  GPIO.output(dcf_4, GPIO.LOW)
+  GPIO.output(dcf_5, GPIO.LOW)
+  GPIO.output(dcf_6, GPIO.LOW)
+  GPIO.output(dcf_9, GPIO.HIGH)
+  GPIO.output(dcf_10, GPIO.HIGH)
+  GPIO.output(dcf_11, GPIO.HIGH)
+  GPIO.output(dcf_2, GPIO.HIGH)
+  time.sleep(0.5)
+  GPIO.output(dcf_7, GPIO.HIGH)
+  GPIO.output(dcf_2, GPIO.LOW)
+  GPIO.output(dcf_1, GPIO.LOW)
+  GPIO.output(dcf_8, GPIO.LOW)
+  GPIO.output(dcf_12, GPIO.HIGH)
+  time.sleep(0.5)
+  GPIO.output(dcf_8, GPIO.HIGH)
+  GPIO.output(dcf_12, GPIO.LOW)
+  GPIO.output(dcf_9, GPIO.LOW)
+  GPIO.output(dcf_10, GPIO.LOW)
+  GPIO.output(dcf_11, GPIO.LOW)
+  GPIO.output(dcf_8, GPIO.LOW)
+  GPIO.output(dcf_12, GPIO.HIGH)
+  time.sleep(6)
+  GPIO.output(dcf_8, GPIO.HIGH)
+  GPIO.output(dcf_9, GPIO.HIGH)
+  GPIO.output(dcf_10, GPIO.HIGH)
+  GPIO.output(dcf_11, GPIO.HIGH)
+  GPIO.output(dcf_12, GPIO.LOW)
+  GPIO.output(dcf_7, GPIO.LOW)
+  GPIO.output(dcf_12, GPIO.HIGH)
+  time.sleep(0.5)
+  GPIO.output(dcf_7, GPIO.HIGH)
+  GPIO.output(dcf_12, GPIO.LOW)
+  GPIO.output(dcf_9, GPIO.LOW)
+  GPIO.output(dcf_10, GPIO.LOW)
+  GPIO.output(dcf_11, GPIO.LOW)
+  GPIO.output(dcf_4, GPIO.HIGH)
+  GPIO.output(dcf_5, GPIO.HIGH)
+  GPIO.output(dcf_6, GPIO.HIGH)
+  GPIO.output(dcf_1, GPIO.HIGH)
+  time.sleep(3)
+  GPIO.output(dcf_1, GPIO.LOW)
+  GPIO.output(dcf_7, GPIO.HIGH)
+  GPIO.output(dcf_8, GPIO.LOW)
+  GPIO.output(dcf_12, GPIO.HIGH)
+  time.sleep(0.5)
+  GPIO.output(dcf_12, GPIO.LOW)
+  GPIO.output(dcf_7, GPIO.LOW)
+  GPIO.output(dcf_4, GPIO.LOW)
+  GPIO.output(dcf_5, GPIO.LOW)
+  GPIO.output(dcf_6, GPIO.LOW)
+  # 清理 GPIO 资源
+  GPIO.cleanup()
+控制抬头代码
+  import RPi.GPIO as GPIO
+  import time
+  # 定义电磁阀引脚
+  dcf_pins = {
+   'dcf_1': 18,
+   'dcf_2': 19,
+   'dcf_3': 20,
+   'dcf_4': 21,
+   'dcf_5': 22,
+   'dcf_6': 23,
+   'dcf_7': 24,
+   'dcf_8': 25,
+   'dcf_9': 26,
+   'dcf_10': 27,
+   'dcf_11': 28,
+   'dcf_12': 29
+  }
+  # 初始化 GPIO 引脚
+  GPIO.setmode(GPIO.BCM)
+  for pin in dcf_pins.values():
+   GPIO.setup(pin, GPIO.OUT)
+  # 控制电磁阀开断的函数
+  def control_dcf(pin, state):
+   GPIO.output(pin, state)
+  # 控制电磁阀的开断顺序
+  control_dcf(dcf_pins['dcf_1'], GPIO.HIGH)
+  control_dcf(dcf_pins['dcf_3'], GPIO.HIGH)
+  time.sleep(0.5)
+  control_dcf(dcf_pins['dcf_8'], GPIO.HIGH)
+  control_dcf(dcf_pins['dcf_3'], GPIO.LOW)
+  control_dcf(dcf_pins['dcf_5'], GPIO.HIGH)
+  control_dcf(dcf_pins['dcf_6'], GPIO.HIGH)
+  time.sleep(1.5)
+  control_dcf(dcf_pins['dcf_12'], GPIO.HIGH)
+  time.sleep(2)
+  control_dcf(dcf_pins['dcf_10'], GPIO.HIGH)
+  control_dcf(dcf_pins['dcf_11'], GPIO.HIGH)
+  control_dcf(dcf_pins['dcf_9'], GPIO.HIGH)
+  control_dcf(dcf_pins['dcf_5'], GPIO.LOW)
+  control_dcf(dcf_pins['dcf_6'], GPIO.LOW)
+  time.sleep(1)
+  control_dcf(dcf_pins['dcf_4'], GPIO.HIGH)
+  control_dcf(dcf_pins['dcf_10'], GPIO.LOW)
+  control_dcf(dcf_pins['dcf_11'], GPIO.LOW)
+  control_dcf(dcf_pins['dcf_9'], GPIO.LOW)
+  time.sleep(1)
+  control_dcf(dcf_pins['dcf_9'], GPIO.HIGH)
+  control_dcf(dcf_pins['dcf_4'], GPIO.LOW)
+  control_dcf(dcf_pins['dcf_1'], GPIO.LOW)
+  control_dcf(dcf_pins['dcf_8'], GPIO.LOW)
+  control_dcf(dcf_pins['dcf_12'], GPIO.LOW)
+  control_dcf(dcf_pins['dcf_9'], GPIO.LOW)
+  time.sleep(0.5)
+图像采集代码
+  import cv2
+  import time
+  import requests
+  import base64
+  # 定义摄像头编号和上传地址
+  camera_id = 0
+  upload_url = "http://ruchong520" # 请将 your_upload_url 替换为实际的上传地址
+  # 初始化摄像头
+  cap = cv2.VideoCapture(camera_id)
+  # 设置摄像头分辨率
+  cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+  cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+  while True:
+   # 读取摄像头拍摄的图像
+   ret, frame = cap.read()
+   # 如果读取成功
+   if ret:
+   # 将图像转换为 base64 编码
+   _, img_encode = cv2.imencode('.jpg', frame)
+   img_base64 = base64.b64encode(img_encode).decode('utf-8')
+   # 将图像上传到云服务器
+   data = {'image': img_base64}
+   response = requests.post(upload_url, data=data)
+   # 输出上传结果
+   if response.status_code == 200:
+   print("Image uploaded successfully.")
+   else:
+   print("Failed to upload image.")
+   # 延时 1 秒
+   time.sleep(1)
+  # 释放摄像头资源
+  cap.release()" # 请将 your_upload_url 替换为实际的上传地址
+  # 初始化摄像头
+  cap = cv2.VideoCapture(camera_id)
+  # 设置摄像头分辨率
+  cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+  cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+  while True:
+   # 读取摄像头拍摄的图像
+   ret, frame = cap.read()
+   # 如果读取成功
+   if ret:
+   # 将图像转换为 base64 编码
+   _, img_encode = cv2.imencode('.jpg', frame)
+   img_base64 = base64.b64encode(img_encode).decode('utf-8')
+   # 将图像上传到云服务器
+   data = {'image': img_base64}
+   response = requests.post(upload_url, data=data)
+   # 输出上传结果
+   if response.status_code == 200:
+   print("Image uploaded successfully.")
+   else:
+   print("Failed to upload image.")
+   # 延时 1 秒
+   time.sleep(1)
+  # 释放摄像头资源
+  cap.release()
